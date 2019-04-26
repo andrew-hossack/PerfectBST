@@ -49,7 +49,7 @@ public class PerfectBST<T extends Comparable<T>>  {
 		public TreeNode<T> getRightChild() {
 			return rightChild;
 		}
-	}
+	} 
 	
 	private TreeNode<T> root;
     private final Comparator<T> cmp;
