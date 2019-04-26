@@ -33,29 +33,32 @@ public class PerfectBST<T extends Comparable<T>> {
 		// begin output
 		System.out.println("Tree size n = " + n.toString());
 		System.out.println("\tKey = " + key.toString());
-		System.out.println("\tType = ");
-		System.out.println("\tDepth = " + getDepthChildren(n,key).get(0));
+		System.out.println("\tType = " + nodeAttribues(n,key).get(4));
+		System.out.println("\tDepth = " + nodeAttribues(n,key).get(0));
 		System.out.println("\tHeight = " + getHeight(n, key));
-		System.out.println("\tParent = ");
-		System.out.println("\tLeft = " + getDepthChildren(n,key).get(2));
-		System.out.println("\tRight = " + getDepthChildren(n,key).get(1));
+		System.out.println("\tParent = " + nodeAttribues(n,key).get(3));
+		System.out.println("\tLeft = " + nodeAttribues(n,key).get(2));
+		System.out.println("\tRight = " + nodeAttribues(n,key).get(1));
 
 		return;
 	}
 
-	public static ArrayList<String> getDepthChildren(BigInteger n, BigInteger key) {
+	public static ArrayList<String> nodeAttribues(BigInteger n, BigInteger key) {
 		ArrayList<String> children = new ArrayList<String>();
 		int depth = 1;
 		BigInteger currentN = n.add(BigInteger.ONE).divide(new BigInteger("2"));
 		BigInteger root = n.add(BigInteger.ONE).divide(new BigInteger("2"));
+		BigInteger parent = null;
 		
 		while (currentN.compareTo(key) != 0) {
 			if (key.compareTo(currentN) > 0) {
+				parent = currentN;
 				currentN = currentN.add(root.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger()));
 				depth++;
 			}
 
 			if (key.compareTo(currentN) < 0) {
+				parent = currentN;
 				currentN = currentN.subtract(root.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger()));
 				depth++;
 			}
@@ -68,6 +71,14 @@ public class PerfectBST<T extends Comparable<T>> {
 			children.add("- (leaf)");
 			children.add("- (leaf)");
 		}
+
+		children.add(parent.toString());
+		
+		if(key.compareTo(parent)<0) {
+			children.add("LEFT");
+		}else {
+			children.add("RIGHT");
+		}
 		return children;
 	}
 	
@@ -75,7 +86,7 @@ public class PerfectBST<T extends Comparable<T>> {
 	public static int getHeight(BigInteger n, BigInteger key) {
 		double totalDepth = Math.log(n.add(BigInteger.ONE).doubleValue()) / Math.log(2) - 1;
 		
-		return (int) (totalDepth - Integer.parseInt(getDepthChildren(n,key).get(0)));
+		return (int) (totalDepth - Integer.parseInt(nodeAttribues(n,key).get(0)));
 	}
 
 }
