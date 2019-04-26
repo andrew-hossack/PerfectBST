@@ -34,47 +34,48 @@ public class PerfectBST<T extends Comparable<T>> {
 		System.out.println("Tree size n = " + n.toString());
 		System.out.println("\tKey = " + key.toString());
 		System.out.println("\tType = ");
-		System.out.println("\tDepth = " + getDepth(n, key));
+		System.out.println("\tDepth = " + getDepthChildren(n,key).get(0));
 		System.out.println("\tHeight = " + getHeight(n, key));
 		System.out.println("\tParent = ");
-		System.out.println("\tLeft = ");
-		System.out.println("\tRight = ");
-		getChildren(n,key);
+		System.out.println("\tLeft = " + getDepthChildren(n,key).get(2));
+		System.out.println("\tRight = " + getDepthChildren(n,key).get(1));
 
 		return;
 	}
 
-	public static int getDepthChildren(BigInteger n, BigInteger key) {
-		ArrayList<BigInteger> children = new ArrayList<BigInteger>();
+	public static ArrayList<String> getDepthChildren(BigInteger n, BigInteger key) {
+		ArrayList<String> children = new ArrayList<String>();
 		int depth = 1;
 		BigInteger currentN = n.add(BigInteger.ONE).divide(new BigInteger("2"));
-		BigInteger x = n.add(BigInteger.ONE).divide(new BigInteger("2"));
-
-		if (n.compareTo(key) == 0) {
-			return 0;
-		}
+		BigInteger root = n.add(BigInteger.ONE).divide(new BigInteger("2"));
+		
 		while (currentN.compareTo(key) != 0) {
 			if (key.compareTo(currentN) > 0) {
-				currentN = currentN.add(x.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger()));
+				currentN = currentN.add(root.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger()));
 				depth++;
 			}
 
 			if (key.compareTo(currentN) < 0) {
-				currentN = currentN.subtract(x.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger()));
+				currentN = currentN.subtract(root.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger()));
 				depth++;
 			}
 		}
-		children.add(new BigInteger(depth));
-		children.add(currentN.add(x.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger())));;
-		children.add(currentN.subtract(x.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger())));;
-		return depth - 1;
+		children.add(Integer.toString(depth-1));
+		if(currentN.mod(new BigInteger("2"))==BigInteger.ZERO) {
+			children.add(currentN.add(root.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger())).toString());;
+			children.add(currentN.subtract(root.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger())).toString());;			
+		}else {
+			children.add("- (leaf)");
+			children.add("- (leaf)");
+		}
+		return children;
 	}
 	
 
 	public static int getHeight(BigInteger n, BigInteger key) {
 		double totalDepth = Math.log(n.add(BigInteger.ONE).doubleValue()) / Math.log(2) - 1;
-		int depthOfKey = getDepth(n, key);
-		return (int) (totalDepth - depthOfKey);
+		
+		return (int) (totalDepth - Integer.parseInt(getDepthChildren(n,key).get(0)));
 	}
 
 }
