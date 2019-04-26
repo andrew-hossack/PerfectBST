@@ -1,3 +1,8 @@
+/**
+ * This program produces a report from a perfect binary tree.
+ * 
+ * @author Rainier Sarreal and Andrew Hossack
+ */
 
 public class PerfectBST {
 	
