@@ -8,20 +8,29 @@
 import java.math.BigInteger;
 
 public class PerfectBST<T extends Comparable<T>> {
-	
 
 	public static void main(String[] args) {
-		// main goes here
+
+		// number of elements
+		int n = 16;
+		// key value k
+		int key = 0;
+
+		// verify input n to be in right form
+		if ((Math.log(n + 1) / Math.log(2)) - 1 != (int) (Math.log(n + 1) / Math.log(2)) - 1) {
+			System.err.println("Invalid entry for n");
+			return;
+		}
+
 		PerfectBST<BigInteger> tree = new PerfectBST<BigInteger>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 1; i <= n; i++) {
 			tree.insert(BigInteger.valueOf(i));
 		}
 
 		tree.printInorder(tree.root);
 	}
 
-	
 	
 	
 	
