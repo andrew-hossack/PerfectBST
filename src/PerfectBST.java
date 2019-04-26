@@ -1,11 +1,6 @@
 
 public class PerfectBST {
 	
-	public static void main(String[] args) {
-		PerfectBST tree = new PerfectBST();
-		
-
-	}
 	
 
 	Node root;
