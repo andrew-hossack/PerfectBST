@@ -15,7 +15,6 @@ public class PerfectBST<T extends Comparable<T>> {
 		BigInteger n = new BigInteger("15");
 		// key value k
 		BigInteger key = null;
-
 		// verify input n to be in right form
 		if ((Math.log(n.intValue() + 1) / Math.log(2)) - 1 != (int) (Math.log(n.intValue() + 1) / Math.log(2)) - 1) {
 			System.err.println("Invalid entry for n");
@@ -31,16 +30,12 @@ public class PerfectBST<T extends Comparable<T>> {
 		tree.printInorder(tree.root);
 	}
 
-	
-	
-	
-	
 	// root of tree
-	Node root;
+	TreeNode root;
 
 	// constructor methods
 	<T> PerfectBST(T key) {
-		root = new Node(key);
+		root = new TreeNode(key);
 	}
 
 	PerfectBST() {
@@ -53,10 +48,10 @@ public class PerfectBST<T extends Comparable<T>> {
 	}
 
 	// recursively insert a new key
-	private Node<T> insertRec(Node<T> root, T key) {
+	private TreeNode<T> insertRec(TreeNode<T> root, T key) {
 		/* If the tree is empty, return a new node */
 		if (root == null) {
-			root = new Node(key);
+			root = new TreeNode(key);
 			return root;
 		}
 		/* Otherwise, recur down the tree */
@@ -69,7 +64,7 @@ public class PerfectBST<T extends Comparable<T>> {
 		return root;
 	}
 
-	void printInorder(Node node) {
+	void printInorder(TreeNode node) {
 		if (node == null)
 			return;
 
@@ -84,15 +79,23 @@ public class PerfectBST<T extends Comparable<T>> {
 	}
 
 	// Node class
-	public class Node<T> {
+	public class TreeNode<T> {
 		// node attributes
 		private final T key;
-		Node<T> leftChild;
-		Node<T> rightChild;
-		Node<T> parent;
+		TreeNode<T> leftChild;
+		TreeNode<T> rightChild;
+//		Node<T> parent;
+
+		public boolean hasLeftChild() {
+			return leftChild != null;
+		}
+
+		public boolean hasRightChild() {
+			return rightChild != null;
+		}
 
 		// constructor, getters & setters
-		Node(T key) {
+		TreeNode(T key) {
 			this.key = key;
 			rightChild = leftChild = null;
 		}
@@ -101,6 +104,18 @@ public class PerfectBST<T extends Comparable<T>> {
 			return key;
 		}
 
+	}
+
+	String getType(TreeNode currentNode) {
+		if (currentNode.hasLeftChild() && currentNode.hasRightChild()) {
+			return "ROOT";
+		} else if (currentNode.hasLeftChild() && !currentNode.hasRightChild()) {
+			return "LEFT";
+		} else if (!currentNode.hasLeftChild() && currentNode.hasRightChild()) {
+			return "RIGHT";
+		} else {
+			return null;
+		}
 	}
 
 }
