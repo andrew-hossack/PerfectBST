@@ -1,12 +1,12 @@
-import java.math.BigInteger;
-import java.util.Comparator;
-
 /**
  * This program produces a report from a perfect binary tree.
  * 
  * @author Rainier Sarreal and Andrew Hossack
  * @param <T>
  */
+
+import java.math.BigInteger;
+import java.util.Comparator;
 
 public class PerfectBST<T extends Comparable<T>>  {
 	
