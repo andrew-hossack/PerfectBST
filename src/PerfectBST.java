@@ -5,7 +5,6 @@
  */
 
 public class PerfectBST {
-	//hello rainier what is up
 
 	Node root;
 
@@ -34,8 +33,7 @@ public class PerfectBST {
 	}
 
 	PerfectBST generateTree(int n) {
-		//has to validate n based on the given equation 2^(n+1) -1
-
+		// has to validate n based on the given equation 2^(n+1) -1
 
 		PerfectBST tree = new PerfectBST();
 
@@ -46,6 +44,30 @@ public class PerfectBST {
 		}
 
 		return tree;
+	}
+
+	public class Node {
+		private int key;
+		Node leftChild;
+		Node rightChild;
+
+		Node(int key) {
+			this.key = key;
+			rightChild = leftChild = null;
+		}
+
+		public int getValue() {
+			return key;
+		}
+
+		public Node getLeftChild() {
+			return leftChild;
+		}
+
+		public Node getRightChild() {
+			return rightChild;
+		}
+
 	}
 
 }
