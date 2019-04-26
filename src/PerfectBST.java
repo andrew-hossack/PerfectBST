@@ -1,30 +1,24 @@
+
 /**
  * This program produces a report from a perfect binary tree.
  * 
  * @author Rainier Sarreal and Andrew Hossack
  */
 
-public class PerfectBST {
+import java.math.BigInteger;
 
-	Node root;
+public class PerfectBST<T extends Comparable<T>> {
 
-	// add nodes recursively
-	private Node addRecursive(Node currentNode, int value) {
-		if (currentNode == null) {
-			return new Node(value);
-		}
-		if (value < currentNode.getValue()) {
-			currentNode.leftChild = addRecursive(currentNode.leftChild, value);
-		} else if (value > currentNode.getValue()) {
-			currentNode.rightChild = addRecursive(currentNode.rightChild, value);
-		} else {
-			return currentNode;
-		}
-		return currentNode;
+	public static void main(String[] args) {
+		// main goes here
+
 	}
 
+	// root of tree
+	Node root;
+
 	// constructor methods
-	PerfectBST(int key) {
+	<T> PerfectBST(T key) {
 		root = new Node(key);
 	}
 
@@ -32,42 +26,35 @@ public class PerfectBST {
 		root = null;
 	}
 
-	PerfectBST generateTree(int n) {
-		// has to validate n based on the given equation 2^(n+1) -1
+	// Node class
+	public class Node<T> {
+		private final T key;
+		Node<T> leftChild;
+		Node<T> rightChild;
+		Node<T> parent;
 
-		PerfectBST tree = new PerfectBST();
-
-		tree.root = new Node(1);
-
-		for (int i = 2; i <= n; i++) {
-			tree.addRecursive(tree.root, i);
-		}
-
-		return tree;
-	}
-
-	public class Node {
-		private int key;
-		Node leftChild;
-		Node rightChild;
-
-		Node(int key) {
+		Node(T key) {
 			this.key = key;
 			rightChild = leftChild = null;
 		}
 
-		public int getValue() {
+		public T getValue() {
 			return key;
 		}
 
-		public Node getLeftChild() {
+		public Node<T> getLeftChild() {
 			return leftChild;
 		}
 
-		public Node getRightChild() {
+		public Node<T> getRightChild() {
 			return rightChild;
 		}
 
+		public void setParent(Node<T> parent) {
+			this.parent = parent;
+		}
+
 	}
+
 
 }
