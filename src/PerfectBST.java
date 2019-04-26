@@ -36,7 +36,7 @@ public class PerfectBST {
 
 	PerfectBST generateTree(int n) {
 		//has to validate n based on the given equation 2^(n+1) -1
-		//and 1<=k<=n
+
 
 		PerfectBST tree = new PerfectBST();
 
