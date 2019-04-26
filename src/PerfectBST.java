@@ -12,19 +12,19 @@ public class PerfectBST<T extends Comparable<T>> {
 	public static void main(String[] args) {
 
 		// number of elements
-		int n = 16;
+		BigInteger n = new BigInteger("15");
 		// key value k
-		int key = 0;
+		BigInteger key = null;
 
 		// verify input n to be in right form
-		if ((Math.log(n + 1) / Math.log(2)) - 1 != (int) (Math.log(n + 1) / Math.log(2)) - 1) {
+		if ((Math.log(n.intValue() + 1) / Math.log(2)) - 1 != (int) (Math.log(n.intValue() + 1) / Math.log(2)) - 1) {
 			System.err.println("Invalid entry for n");
 			return;
 		}
 
 		PerfectBST<BigInteger> tree = new PerfectBST<BigInteger>();
 
-		for (int i = 1; i <= n; i++) {
+		for (int i = 1; i <= n.intValue(); i++) {
 			tree.insert(BigInteger.valueOf(i));
 		}
 
