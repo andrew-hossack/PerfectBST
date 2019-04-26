@@ -8,6 +8,7 @@
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class PerfectBST<T extends Comparable<T>> {
 
@@ -38,11 +39,13 @@ public class PerfectBST<T extends Comparable<T>> {
 		System.out.println("\tParent = ");
 		System.out.println("\tLeft = ");
 		System.out.println("\tRight = ");
+		getChildren(n,key);
 
 		return;
 	}
 
-	public static int getDepth(BigInteger n, BigInteger key) {
+	public static int getDepthChildren(BigInteger n, BigInteger key) {
+		ArrayList<BigInteger> children = new ArrayList<BigInteger>();
 		int depth = 1;
 		BigInteger currentN = n.add(BigInteger.ONE).divide(new BigInteger("2"));
 		BigInteger x = n.add(BigInteger.ONE).divide(new BigInteger("2"));
@@ -61,6 +64,9 @@ public class PerfectBST<T extends Comparable<T>> {
 				depth++;
 			}
 		}
+		children.add(new BigInteger(depth));
+		children.add(currentN.add(x.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger())));;
+		children.add(currentN.subtract(x.divide(BigDecimal.valueOf(Math.pow(2, depth)).toBigInteger())));;
 		return depth - 1;
 	}
 	
